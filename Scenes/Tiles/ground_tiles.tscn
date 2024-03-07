@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://m5vy3s7wi0oq"]
+
+[ext_resource type="Texture2D" uid="uid://c5w7ngupd2q8f" path="res://Textures/Tiles/Stone Block.png" id="1_j5whd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_607xh"]
+resource_name = "Stone"
+texture = ExtResource("1_j5whd")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_kdcdc"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_607xh")
+
+[node name="GroundTiles" type="TileMap"]
+tile_set = SubResource("TileSet_kdcdc")
+format = 2
