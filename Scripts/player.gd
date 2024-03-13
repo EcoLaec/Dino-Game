@@ -27,6 +27,10 @@ func apply_gravity(delta):
 func handle_jump():
 	if is_on_floor() and Input.is_action_just_pressed("Jump"):
 		velocity.y = jump_velocity
+	
+	if not is_on_floor():
+		if Input.is_action_just_released("Jump") && velocity.y < jump_velocity / 2:
+			velocity.y = jump_velocity / 2
 
 func apply_acceleration(input_axis,delta):
 	if input_axis:
