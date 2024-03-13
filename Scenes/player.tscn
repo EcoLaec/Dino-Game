@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctwkidvtt0ar3"]
+[gd_scene load_steps=26 format=3 uid="uid://ctwkidvtt0ar3"]
 
 [ext_resource type="Texture2D" uid="uid://bm8gkvt7t72x7" path="res://Textures/Player/Green Dino Fall.png" id="1_kodxw"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oe6k2"]
+[ext_resource type="Texture2D" uid="uid://b83b11nmxeymv" path="res://Textures/Player/Green Dino Cling.png" id="2_n1cg4"]
 [ext_resource type="Texture2D" uid="uid://bg2hh1osprogl" path="res://Textures/Player/Green Dino Idle.png" id="2_pvln0"]
 [ext_resource type="Texture2D" uid="uid://crqb3srtsnsql" path="res://Textures/Player/Green Dino Jump.png" id="3_kquyr"]
 [ext_resource type="Texture2D" uid="uid://dbwnulovng1cv" path="res://Textures/Player/Green Dino Walk.png" id="4_874qn"]
+[ext_resource type="Texture2D" uid="uid://b1aarbcsdrfv2" path="res://Textures/Player/Green Dino Run.png" id="5_6wy7i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmtro"]
 atlas = ExtResource("2_pvln0")
@@ -21,6 +23,30 @@ region = Rect2(48, 0, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8aya"]
 atlas = ExtResource("2_pvln0")
 region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxe4c"]
+atlas = ExtResource("5_6wy7i")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7meo6"]
+atlas = ExtResource("5_6wy7i")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4riil"]
+atlas = ExtResource("5_6wy7i")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dikf"]
+atlas = ExtResource("5_6wy7i")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roh86"]
+atlas = ExtResource("5_6wy7i")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81r1u"]
+atlas = ExtResource("5_6wy7i")
+region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_on8ng"]
 atlas = ExtResource("4_874qn")
@@ -48,6 +74,14 @@ region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ex3qy"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n1cg4")
+}],
+"loop": true,
+"name": &"cling",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_kodxw")
@@ -83,6 +117,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_bxe4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7meo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4riil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dikf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_roh86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81r1u")
+}],
+"loop": true,
+"name": &"sprint",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_on8ng")
 }, {
 "duration": 1.0,
@@ -114,7 +171,7 @@ script = ExtResource("1_oe6k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ex3qy")
-animation = &"idle"
+animation = &"cling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -122,3 +179,7 @@ shape = SubResource("RectangleShape2D_5kbed")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="CoyoteTime" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
