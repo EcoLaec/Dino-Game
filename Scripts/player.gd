@@ -27,6 +27,7 @@ var stored_wall_normal = Vector2.ZERO
 var clinging = false
 var sprinting = false
 var respawn_point = Vector2.ZERO
+var stored_velocity = Vector2.ZERO
 
 func _ready():
 	respawn_point = position
@@ -44,6 +45,8 @@ func _physics_process(delta):
 	# Before Moving
 	var was_on_floor = is_on_floor()
 	var was_on_wall = is_on_wall_only()
+	var was_in_air = not is_on_floor()
+	if was_in_air: stored_velocity = velocity
 	if was_on_wall: stored_wall_normal = get_wall_normal()
 	move_and_slide()
 	# After Moving
@@ -52,6 +55,9 @@ func _physics_process(delta):
 	if just_left_ledge: coyote_time.start()
 	var just_left_wall = was_on_wall and not is_on_wall()
 	if just_left_wall: wall_time.start()
+	if was_in_air and is_on_floor():
+		$LandingSound.playRandomSound(1.0,-30.0 + (15.0 * (stored_velocity.y / terminal_velocity)))
+		apply_squish(Vector2((stored_velocity.y / terminal_velocity) * 0.15,-(stored_velocity.y / terminal_velocity) * 0.33))
 
 func apply_gravity(delta):
 	var current_terminal_velocity = cling_speed if clinging else terminal_velocity
@@ -68,6 +74,8 @@ func handle_wall_jump():
 		velocity.y = jump_velocity * wall_jump_vertical_scale
 		just_wall_jumped = true
 		air_jumps_made = 0
+		$JumpSound.playSound(1.3,-17.5)
+		apply_squish(Vector2(-0.1,0.15))
 
 func handle_jump():
 	# Resetting Air Jumps
@@ -75,6 +83,8 @@ func handle_jump():
 	# Jumping
 	if (is_on_floor() or coyote_time.time_left > 0.0) and Input.is_action_just_pressed("Jump"):
 		velocity.y = jump_velocity
+		$JumpSound.playSound(1.0,-15.0)
+		apply_squish(Vector2(-0.15,0.2))
 	# Off of Floor
 	if not is_on_floor():
 		# Short Hops
@@ -85,6 +95,8 @@ func handle_jump():
 		if Input.is_action_just_pressed("Jump") and air_jumps_made < air_jumps and coyote_time.time_left == 0.0 and not just_wall_jumped:
 			velocity.y = jump_velocity * air_jump_scale
 			air_jumps_made += 1
+			$JumpSound.playSound(1.0 + (0.2 * air_jumps_made),-17.5)
+			apply_squish(Vector2(-0.1,0.15))
 
 func apply_acceleration(input_axis,delta):
 	sprinting = Input.is_action_pressed("Sprint")
@@ -125,6 +137,11 @@ func update_animations(input_axis):
 			sprite.play("fall")
 		if clinging: sprite.play("cling")
 
+func apply_squish(squish_amount : Vector2):
+	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	sprite.scale = Vector2(1,1) + squish_amount
+	tween.tween_property(sprite, "scale", Vector2(1,1), 0.25)
+
 func die():
 	Global.player_lives -= 1
 	if Global.player_lives <= 0:
@@ -141,3 +158,8 @@ func _on_hazard_collider_area_entered(area):
 
 func _on_trigger_collider_area_entered(area):
 	area.onCollide()
+
+
+func _on_animated_sprite_2d_frame_changed():
+	if sprite.animation == "walk" and sprite.frame == 1:
+		$StepSound.playRandomSound(1.0,-10.0)

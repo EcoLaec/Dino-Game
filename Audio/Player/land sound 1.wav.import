@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1xbemk7tpuno"
+path="res://.godot/imported/land sound 1.wav-ae14731cf9a493fd9563509614b47989.sample"
+
+[deps]
+
+source_file="res://Audio/Player/land sound 1.wav"
+dest_files=["res://.godot/imported/land sound 1.wav-ae14731cf9a493fd9563509614b47989.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
