@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ctwkidvtt0ar3"]
+[gd_scene load_steps=28 format=3 uid="uid://ctwkidvtt0ar3"]
 
 [ext_resource type="Texture2D" uid="uid://bm8gkvt7t72x7" path="res://Textures/Player/Green Dino Fall.png" id="1_kodxw"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oe6k2"]
@@ -168,13 +168,16 @@ size = Vector2(8, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1u5bi"]
 size = Vector2(6, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3crp"]
+size = Vector2(12, 20)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_oe6k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ex3qy")
-animation = &"jump"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -191,6 +194,14 @@ collision_mask = 4
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_1u5bi")
 
+[node name="TriggerCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerCollider"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_x3crp")
+
 [node name="CoyoteTime" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -199,4 +210,6 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[connection signal="area_entered" from="HazardCollider" to="." method="_on_hazard_collider_area_entered"]
 [connection signal="body_entered" from="HazardCollider" to="." method="_on_hazard_collider_body_entered"]
+[connection signal="area_entered" from="TriggerCollider" to="." method="_on_trigger_collider_area_entered"]

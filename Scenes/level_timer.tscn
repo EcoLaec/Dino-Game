@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cpiom6d8q6irh"]
+
+[node name="LevelTimer" type="Timer"]

@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://ckyvhcyw8lu37"]
+
+[ext_resource type="Texture2D" uid="uid://c3xc3ipdh0pxi" path="res://Textures/Pickups/Amber.png" id="1_d5ab3"]
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_yqfie"]
+[ext_resource type="Script" path="res://Scripts/Amber.gd" id="2_680ps"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxilt"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yjjg"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymmca"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(15, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is6cu"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(30, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evixq"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(45, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y2qr"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(60, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lugf0"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(75, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnq5w"]
+atlas = ExtResource("1_d5ab3")
+region = Rect2(90, 0, 15, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bb5vi"]
+animations = [{
+"frames": [{
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_1yjjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymmca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is6cu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evixq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7y2qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lugf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnq5w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Amber" instance=ExtResource("1_yqfie")]
+script = ExtResource("2_680ps")
+points = 2500
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_dxilt")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_bb5vi")
+frame_progress = 0.962507

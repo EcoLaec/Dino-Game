@@ -29,7 +29,8 @@ var sprinting = false
 var respawn_point = Vector2.ZERO
 
 func _ready():
-	respawn_point = global_position
+	respawn_point = position
+	LevelTimer.timeout.connect(die)
 
 func _physics_process(delta):
 	var input_axis = Input.get_axis("Left","Right")
@@ -125,7 +126,18 @@ func update_animations(input_axis):
 		if clinging: sprite.play("cling")
 
 func die():
-	global_position = respawn_point
+	Global.player_lives -= 1
+	if Global.player_lives <= 0:
+		get_tree().reload_current_scene()
+		Global.player_lives = 5
+	else:
+		global_position = respawn_point
 
 func _on_hazard_collider_body_entered(_body):
-	die()
+	call_deferred("die")
+
+func _on_hazard_collider_area_entered(area):
+	call_deferred("die")
+
+func _on_trigger_collider_area_entered(area):
+	area.onCollide()

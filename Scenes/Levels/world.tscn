@@ -2,17 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://cqc3ukfntn1hk" path="res://Textures/Tiles/Lava Tile.png" id="1_7reld"]
 [ext_resource type="PackedScene" uid="uid://m5vy3s7wi0oq" path="res://Scenes/Tiles/ground_tiles.tscn" id="1_nth3u"]
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_u1my8"]
+[ext_resource type="PackedScene" uid="uid://c0dxhlxh166sm" path="res://Scenes/UI/ui.tscn" id="2_sdeb0"]
 [ext_resource type="PackedScene" uid="uid://ctwkidvtt0ar3" path="res://Scenes/player.tscn" id="2_sus4b"]
-[ext_resource type="Texture2D" uid="uid://com6ld88fqm7w" path="res://Textures/Tiles/Spike Tiles.png" id="4_g6kqx"]
-[ext_resource type="AudioStream" uid="uid://c7bknd5l83g6i" path="res://Audio/DinoGameSong-Calm.wav" id="5_uwqte"]
+[ext_resource type="PackedScene" uid="uid://o473pjhdwvtd" path="res://Scenes/UI/level_transition.tscn" id="5_nrdgj"]
+[ext_resource type="PackedScene" uid="uid://ckyvhcyw8lu37" path="res://Scenes/Pickups/amber.tscn" id="6_ktjv7"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vgny"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyryn"]
 resource_name = "Lava"
 texture = ExtResource("1_7reld")
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:0/animation_columns = 16
 0:0/animation_speed = 5.0
 0:0/animation_mode = 1
@@ -36,79 +34,37 @@ texture = ExtResource("1_7reld")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -4, 8, 8, -8, 8)
-
-[sub_resource type="TileSet" id="TileSet_44bp1"]
-physics_layer_0/collision_layer = 4
-physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_8vgny")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ke2ua"]
-resource_name = "Spikes"
-texture = ExtResource("4_g6kqx")
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, 8, 0, 8, 8, -8, 8)
-2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 0, -8, 0, 8)
-1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, -8, -8, 8, -8, 8, 0)
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 8, 0, -8, 8, -8, 8, 8)
-3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 8, -8, 8, -8, -8, 8, -8, 8, 0, 0, 0)
-3:1/0 = 0
-3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0, -8, 0, 0, 8, 0, 8, 8, -8, 8)
-4:1/0 = 0
-4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:1/0/physics_layer_0/angular_velocity = 0.0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, 0, 0, 0, -8, 8, -8, 8, 8, -8, 8)
-4:0/0 = 0
-4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:0/0/physics_layer_0/angular_velocity = 0.0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, -8, 0, -8, -8, 8, -8, 8, 8, 0, 8)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-2:2/0 = 0
-2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_0/angular_velocity = 0.0
-0:2/0 = 0
-0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:2/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_ys7du"]
+[sub_resource type="TileSet" id="TileSet_hoid3"]
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_ke2ua")
+sources/0 = SubResource("TileSetAtlasSource_eyryn")
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_u1my8")
+
+[node name="LavaTiles" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_hoid3")
+format = 2
 
 [node name="GroundTiles" parent="." instance=ExtResource("1_nth3u")]
 
-[node name="LavaTiles" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_44bp1")
-format = 2
-
 [node name="Player" parent="." instance=ExtResource("2_sus4b")]
 
-[node name="SpikeTiles" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_ys7du")
-format = 2
+[node name="VoidCollider" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_uwqte")
-autoplay = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidCollider"]
+
+[node name="Amber" parent="." instance=ExtResource("6_ktjv7")]
+position = Vector2(0, -32)
+
+[node name="UI" parent="." instance=ExtResource("2_sdeb0")]
+
+[node name="LevelTransition" parent="." instance=ExtResource("5_nrdgj")]
+process_mode = 3
