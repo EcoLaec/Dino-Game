@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ctwkidvtt0ar3"]
+[gd_scene load_steps=29 format=3 uid="uid://ctwkidvtt0ar3"]
 
 [ext_resource type="Texture2D" uid="uid://bm8gkvt7t72x7" path="res://Textures/Player/Green Dino Fall.png" id="1_kodxw"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oe6k2"]
@@ -7,15 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://crqb3srtsnsql" path="res://Textures/Player/Green Dino Jump.png" id="3_kquyr"]
 [ext_resource type="Texture2D" uid="uid://dbwnulovng1cv" path="res://Textures/Player/Green Dino Walk.png" id="4_874qn"]
 [ext_resource type="Texture2D" uid="uid://b1aarbcsdrfv2" path="res://Textures/Player/Green Dino Run.png" id="5_6wy7i"]
-[ext_resource type="AudioStream" uid="uid://dngtoqqgj1u2x" path="res://Audio/Player/jump sound.wav" id="8_0wkms"]
-[ext_resource type="PackedScene" uid="uid://cld3aes8xiig8" path="res://Scenes/sound_queue.tscn" id="8_trv8h"]
-[ext_resource type="PackedScene" uid="uid://cwouoaf8gfsji" path="res://Scenes/sound_pool.tscn" id="10_8jspq"]
-[ext_resource type="AudioStream" uid="uid://c54dx2gosq27b" path="res://Audio/Player/footstep 1.wav" id="11_h2it0"]
-[ext_resource type="AudioStream" uid="uid://dcga8mv1jd0qu" path="res://Audio/Player/footstep 2.wav" id="12_avebu"]
-[ext_resource type="AudioStream" uid="uid://vbkoy3ynq0uo" path="res://Audio/Player/footstep 3.wav" id="13_btp24"]
-[ext_resource type="AudioStream" uid="uid://cj0sgu5hu310e" path="res://Audio/Player/footstep 4.wav" id="14_gijtf"]
-[ext_resource type="AudioStream" uid="uid://d1xbemk7tpuno" path="res://Audio/Player/land sound 1.wav" id="15_ghe4h"]
-[ext_resource type="AudioStream" uid="uid://cypby1wjnv8sn" path="res://Audio/Player/land sound 2.wav" id="16_ci02x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmtro"]
 atlas = ExtResource("2_pvln0")
@@ -180,6 +171,9 @@ size = Vector2(6, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x3crp"]
 size = Vector2(12, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no5gh"]
+size = Vector2(14, 8)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_oe6k2")
@@ -213,6 +207,14 @@ collision_mask = 8
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_x3crp")
 
+[node name="EnemyCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollider"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_no5gh")
+
 [node name="CoyoteTime" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -221,51 +223,8 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="JumpSound" parent="." instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="JumpSound"]
-stream = ExtResource("8_0wkms")
-
-[node name="StepSound" parent="." instance=ExtResource("10_8jspq")]
-
-[node name="SoundQueue" parent="StepSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StepSound/SoundQueue"]
-stream = ExtResource("11_h2it0")
-
-[node name="SoundQueue2" parent="StepSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StepSound/SoundQueue2"]
-stream = ExtResource("12_avebu")
-
-[node name="SoundQueue3" parent="StepSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StepSound/SoundQueue3"]
-stream = ExtResource("13_btp24")
-
-[node name="SoundQueue4" parent="StepSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StepSound/SoundQueue4"]
-stream = ExtResource("14_gijtf")
-
-[node name="LandingSound" parent="." instance=ExtResource("10_8jspq")]
-
-[node name="SoundQueue" parent="LandingSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LandingSound/SoundQueue"]
-stream = ExtResource("15_ghe4h")
-
-[node name="SoundQueue2" parent="LandingSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LandingSound/SoundQueue2"]
-stream = ExtResource("16_ci02x")
-
-[node name="SoundQueue3" parent="LandingSound" instance=ExtResource("8_trv8h")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LandingSound/SoundQueue3"]
-stream = ExtResource("15_ghe4h")
-
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="HazardCollider" to="." method="_on_hazard_collider_area_entered"]
 [connection signal="body_entered" from="HazardCollider" to="." method="_on_hazard_collider_body_entered"]
 [connection signal="area_entered" from="TriggerCollider" to="." method="_on_trigger_collider_area_entered"]
+[connection signal="body_entered" from="EnemyCollider" to="." method="_on_enemy_collider_body_entered"]
