@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqcj8on0mnquk"]
+
+[ext_resource type="AudioStream" uid="uid://c7bknd5l83g6i" path="res://Audio/DinoGameSong-Calm.wav" id="1_nahfd"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_nahfd")
+autoplay = true

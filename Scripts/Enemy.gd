@@ -34,5 +34,5 @@ func die():
 func disable_collision():
 	shape.disabled = true
 
-func _on_edge_detector_body_exited(body):
+func _on_edge_detector_body_exited(_body):
 	change_direction()

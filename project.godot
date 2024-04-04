@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 LevelTimer="*res://Scenes/level_timer.tscn"
 Global="*res://Scripts/global.gd"
+Music="*res://Scenes/music.tscn"
 
 [input]
 

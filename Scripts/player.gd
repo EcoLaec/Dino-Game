@@ -21,6 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite = $AnimatedSprite2D
 @onready var coyote_time = $CoyoteTime
 @onready var wall_time = $WallTime
+@onready var jump_sound = $JumpSound
 var air_jumps_made = 0
 var just_wall_jumped = false
 var stored_wall_normal = Vector2.ZERO
@@ -67,6 +68,7 @@ func handle_wall_jump():
 		velocity.x = wall_normal.x * speed * wall_jump_horizontal_scale
 		velocity.y = jump_velocity * wall_jump_vertical_scale
 		just_wall_jumped = true
+		jump_sound.play()
 		air_jumps_made = 0
 
 func handle_jump():
@@ -75,6 +77,7 @@ func handle_jump():
 	# Jumping
 	if (is_on_floor() or coyote_time.time_left > 0.0) and Input.is_action_just_pressed("Jump"):
 		velocity.y = jump_velocity
+		jump_sound.play()
 	# Off of Floor
 	if not is_on_floor():
 		# Short Hops
@@ -85,6 +88,7 @@ func handle_jump():
 		if Input.is_action_just_pressed("Jump") and air_jumps_made < air_jumps and coyote_time.time_left == 0.0 and not just_wall_jumped:
 			velocity.y = jump_velocity * air_jump_scale
 			air_jumps_made += 1
+			jump_sound.play()
 
 func apply_acceleration(input_axis,delta):
 	sprinting = Input.is_action_pressed("Sprint")
@@ -136,7 +140,7 @@ func die():
 func _on_hazard_collider_body_entered(_body):
 	call_deferred("die")
 
-func _on_hazard_collider_area_entered(area):
+func _on_hazard_collider_area_entered(_area):
 	call_deferred("die")
 
 func _on_trigger_collider_area_entered(area):
