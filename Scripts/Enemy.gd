@@ -28,17 +28,11 @@ func die():
 	if not invincible: call_deferred("disable_collision")
 	sprite.stop()
 	sprite.play("death")
+	await sprite.animation_finished
+	queue_free()
 
 func disable_collision():
 	shape.disabled = true
 
 func _on_edge_detector_body_exited(body):
 	change_direction()
-
-func _on_animated_sprite_2d_animation_finished():
-	if sprite.animation == "death":
-		if not invincible:
-			queue_free()
-		else:
-			is_moving = true
-			sprite.play("move")
