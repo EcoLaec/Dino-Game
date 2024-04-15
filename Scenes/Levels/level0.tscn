@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cixu4p8fh3t5e"]
+[gd_scene load_steps=4 format=3 uid="uid://cixu4p8fh3t5e"]
 
 [ext_resource type="PackedScene" uid="uid://c4r18ti01e1b4" path="res://Scenes/Levels/world.tscn" id="1_tq3g6"]
 [ext_resource type="PackedScene" uid="uid://b2js8fp0tklxr" path="res://Scenes/Levels/level1.tscn" id="2_1snw7"]
-[ext_resource type="PackedScene" uid="uid://7at2mbjbdsnb" path="res://Scenes/Enemies/trike.tscn" id="3_85tdt"]
-[ext_resource type="PackedScene" uid="uid://cnh6ddwhlbey3" path="res://Scenes/Enemies/ptero.tscn" id="3_vw6f4"]
-[ext_resource type="PackedScene" uid="uid://cwlcpsqwjccsd" path="res://Scenes/Enemies/anklyo.tscn" id="5_1cm6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dep2"]
 size = Vector2(768, 32)
@@ -24,12 +21,3 @@ shape = SubResource("RectangleShape2D_4dep2")
 
 [node name="Amber" parent="." index="4"]
 position = Vector2(104, -136)
-
-[node name="Trike" parent="." index="7" instance=ExtResource("3_85tdt")]
-position = Vector2(-64, -48)
-
-[node name="Ptero" parent="." index="8" instance=ExtResource("3_vw6f4")]
-position = Vector2(40, -152)
-
-[node name="Enemy" parent="." index="9" instance=ExtResource("5_1cm6w")]
-position = Vector2(16, -96)

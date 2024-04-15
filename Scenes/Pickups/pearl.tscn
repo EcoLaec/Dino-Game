@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://cpjtge3gh8ynl"]
+
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_fgwhf"]
+[ext_resource type="Texture2D" uid="uid://bgh3d8hc8qt4b" path="res://Textures/Pickups/Pearl.png" id="2_pay0a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mtlo5"]
+radius = 6.08276
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37jwp"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(0, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1ebo"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(11, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imapg"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(22, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36ge3"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(33, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_728wb"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(44, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el8ga"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(55, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj60t"]
+atlas = ExtResource("2_pay0a")
+region = Rect2(66, 0, 11, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3kp2k"]
+animations = [{
+"frames": [{
+"duration": 40.0,
+"texture": SubResource("AtlasTexture_37jwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1ebo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imapg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36ge3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_728wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el8ga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj60t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Pearl" instance=ExtResource("1_fgwhf")]
+points = 500
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_mtlo5")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_3kp2k")
+autoplay = "default"
+frame_progress = 0.60841

@@ -29,7 +29,11 @@ func die():
 	sprite.stop()
 	sprite.play("death")
 	await sprite.animation_finished
-	queue_free()
+	if invincible:
+		is_moving = true
+		sprite.play("move")
+	else:
+		queue_free()
 
 func disable_collision():
 	shape.disabled = true

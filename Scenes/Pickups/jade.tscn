@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://clccxl6duttvy"]
+
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_6kgho"]
+[ext_resource type="Texture2D" uid="uid://dyuj5ut3eaypl" path="res://Textures/Pickups/Jade.png" id="2_v53xl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1foao"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51qcg"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(0, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qup0c"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(9, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csfvn"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(18, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_804pa"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(27, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4dd0"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(36, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7830"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(45, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2fhg"]
+atlas = ExtResource("2_v53xl")
+region = Rect2(54, 0, 9, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3wx4"]
+animations = [{
+"frames": [{
+"duration": 50.0,
+"texture": SubResource("AtlasTexture_51qcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qup0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csfvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_804pa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4dd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7830")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2fhg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Jade" instance=ExtResource("1_6kgho")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_1foao")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_d3wx4")
+autoplay = "default"
+frame_progress = 0.0179838
