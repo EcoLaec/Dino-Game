@@ -46,6 +46,7 @@ func _physics_process(delta):
 	var was_on_floor = is_on_floor()
 	var was_on_wall = is_on_wall_only()
 	if was_on_wall: stored_wall_normal = get_wall_normal()
+	if is_on_floor() and Input.is_action_just_pressed("Down"): position.y += 1
 	move_and_slide()
 	# After Moving
 	just_wall_jumped = false

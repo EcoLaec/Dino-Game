@@ -162,7 +162,7 @@ invincible = true
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_wmeug")
-animation = &"move"
+animation = &"death"
 autoplay = "move"
 
 [node name="CollisionShape2D" parent="." index="1"]

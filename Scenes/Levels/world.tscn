@@ -1,12 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4r18ti01e1b4"]
+[gd_scene load_steps=21 format=3 uid="uid://c4r18ti01e1b4"]
 
 [ext_resource type="Texture2D" uid="uid://cqc3ukfntn1hk" path="res://Textures/Tiles/Lava Tile.png" id="1_7reld"]
 [ext_resource type="PackedScene" uid="uid://m5vy3s7wi0oq" path="res://Scenes/Tiles/ground_tiles.tscn" id="1_nth3u"]
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_u1my8"]
 [ext_resource type="PackedScene" uid="uid://c0dxhlxh166sm" path="res://Scenes/UI/ui.tscn" id="2_sdeb0"]
 [ext_resource type="PackedScene" uid="uid://ctwkidvtt0ar3" path="res://Scenes/player.tscn" id="2_sus4b"]
+[ext_resource type="Texture2D" uid="uid://bjxinn5yw72qb" path="res://Textures/Tiles/Stone Block Platform.png" id="3_y5684"]
 [ext_resource type="PackedScene" uid="uid://o473pjhdwvtd" path="res://Scenes/UI/level_transition.tscn" id="5_nrdgj"]
 [ext_resource type="PackedScene" uid="uid://ckyvhcyw8lu37" path="res://Scenes/Pickups/amber.tscn" id="6_ktjv7"]
+[ext_resource type="PackedScene" uid="uid://clccxl6duttvy" path="res://Scenes/Pickups/jade.tscn" id="8_n6l50"]
+[ext_resource type="PackedScene" uid="uid://cwlcpsqwjccsd" path="res://Scenes/Enemies/anklyo.tscn" id="10_63v73"]
+[ext_resource type="PackedScene" uid="uid://n6pl7k3iehbp" path="res://Scenes/Enemies/para.tscn" id="11_pbvdm"]
+[ext_resource type="PackedScene" uid="uid://cnh6ddwhlbey3" path="res://Scenes/Enemies/ptero.tscn" id="12_nycxu"]
+[ext_resource type="PackedScene" uid="uid://7at2mbjbdsnb" path="res://Scenes/Enemies/trike.tscn" id="13_kors2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyryn"]
 resource_name = "Lava"
@@ -44,11 +50,45 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_eyryn")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebl41"]
+resource_name = "Stone Platform"
+texture = ExtResource("3_y5684")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+0:0/0/physics_layer_0/polygon_0/one_way = true
+
+[sub_resource type="TileSet" id="TileSet_kkdk3"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_ebl41")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_er6gc"]
+resource_name = "Pickups"
+scenes/1/scene = ExtResource("8_n6l50")
+scenes/2/scene = ExtResource("6_ktjv7")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_p1uob"]
+resource_name = "Enemies"
+scenes/1/scene = ExtResource("10_63v73")
+scenes/2/scene = ExtResource("11_pbvdm")
+scenes/3/scene = ExtResource("12_nycxu")
+scenes/4/scene = ExtResource("13_kors2")
+
+[sub_resource type="TileSet" id="TileSet_nprum"]
+sources/1 = SubResource("TileSetScenesCollectionSource_er6gc")
+sources/2 = SubResource("TileSetScenesCollectionSource_p1uob")
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_u1my8")
 
 [node name="LavaTiles" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_hoid3")
+format = 2
+
+[node name="PlatformTiles" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_kkdk3")
 format = 2
 
 [node name="GroundTiles" parent="." instance=ExtResource("1_nth3u")]
@@ -61,10 +101,11 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidCollider"]
 
-[node name="Amber" parent="." instance=ExtResource("6_ktjv7")]
-position = Vector2(0, -32)
-
 [node name="UI" parent="." instance=ExtResource("2_sdeb0")]
 
 [node name="LevelTransition" parent="." instance=ExtResource("5_nrdgj")]
 process_mode = 3
+
+[node name="LevelObjects" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_nprum")
+format = 2

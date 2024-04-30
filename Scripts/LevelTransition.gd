@@ -8,4 +8,4 @@ func fade_to_black():
 
 func fade_from_black():
 	animation_player.play("fade_from_black")
-	await  animation_player.animation_finished
+	await animation_player.animation_finished

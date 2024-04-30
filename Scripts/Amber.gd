@@ -1,5 +1,5 @@
 extends Pickup
 
-func onCollide():
+func onPickup(_body):
 	Global.level_complete.emit()
-	super.onCollide()
+	super.onPickup(_body)
