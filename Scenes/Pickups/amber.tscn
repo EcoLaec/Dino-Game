@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckyvhcyw8lu37"]
+[gd_scene load_steps=14 format=3 uid="uid://ckyvhcyw8lu37"]
 
 [ext_resource type="Texture2D" uid="uid://c3xc3ipdh0pxi" path="res://Textures/Pickups/Amber.png" id="1_d5ab3"]
 [ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_yqfie"]
 [ext_resource type="Script" path="res://Scripts/Amber.gd" id="2_680ps"]
+[ext_resource type="AudioStream" uid="uid://dmyl4buiw2fa6" path="res://Audio/Level/Jingle.wav" id="4_v10jt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxilt"]
 radius = 8.0
@@ -66,6 +67,7 @@ animations = [{
 
 [node name="Amber" instance=ExtResource("1_yqfie")]
 script = ExtResource("2_680ps")
+points = 2500
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_dxilt")
@@ -73,3 +75,12 @@ shape = SubResource("CircleShape2D_dxilt")
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_bb5vi")
 frame_progress = 0.962507
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("4_v10jt")
+
+[node name="AmbientParticles" parent="." index="3"]
+amount_ratio = 0.35
+
+[node name="PickupParticles" parent="." index="4"]
+amount = 8

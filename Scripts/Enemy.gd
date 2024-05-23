@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 25.0
 @export var flying = false
 @export var invincible = false
+@export var points = 100
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite = $AnimatedSprite2D
 @onready var shape = $CollisionShape2D
@@ -33,6 +34,7 @@ func die():
 		is_moving = true
 		sprite.play("move")
 	else:
+		Global.score += points
 		queue_free()
 
 func disable_collision():

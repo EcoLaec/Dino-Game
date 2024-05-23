@@ -1,13 +1,17 @@
-[gd_scene load_steps=30 format=3 uid="uid://ctwkidvtt0ar3"]
+[gd_scene load_steps=34 format=3 uid="uid://ctwkidvtt0ar3"]
 
 [ext_resource type="Texture2D" uid="uid://bm8gkvt7t72x7" path="res://Textures/Player/Green Dino Fall.png" id="1_kodxw"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oe6k2"]
+[ext_resource type="PackedScene" uid="uid://bopu67p86gtdt" path="res://Scenes/Particles/jump_particle.tscn" id="2_e7dkk"]
 [ext_resource type="Texture2D" uid="uid://b83b11nmxeymv" path="res://Textures/Player/Green Dino Cling.png" id="2_n1cg4"]
 [ext_resource type="Texture2D" uid="uid://bg2hh1osprogl" path="res://Textures/Player/Green Dino Idle.png" id="2_pvln0"]
+[ext_resource type="PackedScene" uid="uid://tln0hfgtg8ma" path="res://Scenes/Particles/land_particle.tscn" id="3_jjvkp"]
 [ext_resource type="Texture2D" uid="uid://crqb3srtsnsql" path="res://Textures/Player/Green Dino Jump.png" id="3_kquyr"]
 [ext_resource type="Texture2D" uid="uid://dbwnulovng1cv" path="res://Textures/Player/Green Dino Walk.png" id="4_874qn"]
 [ext_resource type="Texture2D" uid="uid://b1aarbcsdrfv2" path="res://Textures/Player/Green Dino Run.png" id="5_6wy7i"]
-[ext_resource type="AudioStream" uid="uid://dngtoqqgj1u2x" path="res://Audio/Player/jump sound.wav" id="8_81kpj"]
+[ext_resource type="AudioStream" uid="uid://cg4el01rp5irg" path="res://Audio/Player/Jump.wav" id="10_og87l"]
+[ext_resource type="AudioStream" uid="uid://c1sbesssox5ga" path="res://Audio/Player/Land.wav" id="11_f7jsw"]
+[ext_resource type="AudioStream" uid="uid://bn3ee21176jmt" path="res://Audio/Player/Hurt.wav" id="12_mxrxs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmtro"]
 atlas = ExtResource("2_pvln0")
@@ -178,6 +182,8 @@ size = Vector2(14, 8)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_oe6k2")
+jump_particle = ExtResource("2_e7dkk")
+land_particle = ExtResource("3_jjvkp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 9)
@@ -224,8 +230,19 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="InvincibiltyTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_81kpj")
+stream = ExtResource("10_og87l")
+volume_db = -10.0
+
+[node name="LandSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_f7jsw")
+volume_db = -10.0
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_mxrxs")
 volume_db = -10.0
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
@@ -233,3 +250,4 @@ volume_db = -10.0
 [connection signal="body_entered" from="HazardCollider" to="." method="_on_hazard_collider_body_entered"]
 [connection signal="area_entered" from="TriggerCollider" to="." method="_on_trigger_collider_area_entered"]
 [connection signal="body_entered" from="EnemyCollider" to="." method="_on_enemy_collider_body_entered"]
+[connection signal="timeout" from="InvincibiltyTimer" to="." method="_on_invincibilty_timer_timeout"]

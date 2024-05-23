@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0dxhlxh166sm"]
+[gd_scene load_steps=6 format=3 uid="uid://c0dxhlxh166sm"]
 
 [ext_resource type="Texture2D" uid="uid://biyy5yoalmqda" path="res://Textures/UI/Green Egg.png" id="1_bi3kq"]
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_f6jox"]
 [ext_resource type="Theme" uid="uid://pvt45myq3ovh" path="res://Scenes/UI/Dino Theme.tres" id="1_tvoda"]
+[ext_resource type="Texture2D" uid="uid://b5hv7egr4oibw" path="res://Textures/UI/Full_Heart.png" id="2_4mxww"]
+[ext_resource type="Texture2D" uid="uid://b126epns3qw1d" path="res://Textures/UI/Empty_Heart.png" id="3_81fdi"]
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_f6jox")
+full_health_sprite = ExtResource("2_4mxww")
+empty_health_sprite = ExtResource("3_81fdi")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -25,6 +29,11 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
+
+[node name="Health" type="HBoxContainer" parent="MarginContainer/Left/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Left/VBoxContainer"]
 layout_mode = 2

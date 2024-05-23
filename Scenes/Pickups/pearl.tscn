@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpjtge3gh8ynl"]
+[gd_scene load_steps=13 format=3 uid="uid://cpjtge3gh8ynl"]
 
 [ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_fgwhf"]
 [ext_resource type="Texture2D" uid="uid://bgh3d8hc8qt4b" path="res://Textures/Pickups/Pearl.png" id="2_pay0a"]
+[ext_resource type="AudioStream" uid="uid://dnp7iod2xhm1y" path="res://Audio/Level/Big Pickup.wav" id="3_yq2cs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mtlo5"]
 radius = 6.08276
@@ -73,3 +74,13 @@ shape = SubResource("CircleShape2D_mtlo5")
 sprite_frames = SubResource("SpriteFrames_3kp2k")
 autoplay = "default"
 frame_progress = 0.60841
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_yq2cs")
+volume_db = -5.0
+
+[node name="AmbientParticles" parent="." index="3"]
+amount_ratio = 0.2
+
+[node name="PickupParticles" parent="." index="4"]
+amount = 4

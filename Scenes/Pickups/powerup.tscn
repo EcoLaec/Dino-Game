@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhjr36wla1e6s"]
+
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_j1gqo"]
+[ext_resource type="Script" path="res://Scripts/Powerup.gd" id="2_0ktdt"]
+
+[node name="Powerup" instance=ExtResource("1_j1gqo")]
+script = ExtResource("2_0ktdt")
+powerup_time = 30.0
+powerup = 0
+points = 1000

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://c34ya60vynwqw"]
+
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_eroo7"]
+[ext_resource type="Script" path="res://Scripts/TimePickup.gd" id="2_d3mqk"]
+[ext_resource type="Texture2D" uid="uid://bjavqcuvgilem" path="res://Textures/Pickups/Timer.png" id="3_locvg"]
+[ext_resource type="AudioStream" uid="uid://dm77caqen0phx" path="res://Audio/Level/Pickup Timer.wav" id="4_m3n4y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feivo"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7vkex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_locvg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TimePickup" instance=ExtResource("1_eroo7")]
+script = ExtResource("2_d3mqk")
+time_gained = 30.0
+points = 500
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_feivo")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_7vkex")
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("4_m3n4y")
+volume_db = -5.0

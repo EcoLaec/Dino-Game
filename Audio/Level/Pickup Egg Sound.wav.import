@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cr4j2s5j3xhar"
+path="res://.godot/imported/Pickup Egg Sound.wav-fbf97a157a59eee5f392e0fa601733b9.sample"
+
+[deps]
+
+source_file="res://Audio/Level/Pickup Egg Sound.wav"
+dest_files=["res://.godot/imported/Pickup Egg Sound.wav-fbf97a157a59eee5f392e0fa601733b9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 # Player Stats
@@ -15,27 +16,38 @@ extends CharacterBody2D
 @export var air_friction = 200.0
 @export var cling_speed = 75.0
 @export var sprint_speed = 130.0
+@export var max_health = 4
 
 # Reference Variables
+@export var jump_particle : PackedScene
+@export var land_particle : PackedScene
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite = $AnimatedSprite2D
 @onready var coyote_time = $CoyoteTime
 @onready var wall_time = $WallTime
 @onready var jump_sound = $JumpSound
+@onready var land_sound = $LandSound
+@onready var hurt_sound = $HurtSound
+@onready var invincibilty_timer = $InvincibiltyTimer
 var air_jumps_made = 0
 var just_wall_jumped = false
 var stored_wall_normal = Vector2.ZERO
 var clinging = false
 var sprinting = false
 var respawn_point = Vector2.ZERO
+var current_health = max_health
+var feet_offset = Vector2(0,8)
+var stored_velocity = Vector2.ZERO
 
 func _ready():
+	Global.player = self
 	respawn_point = position
-	LevelTimer.timeout.connect(die)
+	LevelTimer.timeout.connect(die,true)
 
 func _physics_process(delta):
 	var input_axis = Input.get_axis("Left","Right")
 	clinging = is_on_wall_only() and input_axis and velocity.y >= 0.0
+	if Input.is_action_just_pressed("Reset"): damage(true)
 	apply_gravity(delta)
 	handle_wall_jump()
 	handle_jump()
@@ -44,16 +56,45 @@ func _physics_process(delta):
 	update_animations(input_axis)
 	# Before Moving
 	var was_on_floor = is_on_floor()
+	if not was_on_floor: stored_velocity = velocity
 	var was_on_wall = is_on_wall_only()
 	if was_on_wall: stored_wall_normal = get_wall_normal()
 	if is_on_floor() and Input.is_action_just_pressed("Down"): position.y += 1
 	move_and_slide()
 	# After Moving
+	if not was_on_floor and is_on_floor(): on_landing()
 	just_wall_jumped = false
 	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_ledge: coyote_time.start()
 	var just_left_wall = was_on_wall and not is_on_wall()
 	if just_left_wall: wall_time.start()
+
+func create_particle(particle : PackedScene, offset : Vector2, life : float = -1.0):
+	var p = particle.instantiate()
+	p.emitting = true
+	p.global_position = global_position + offset
+	if life > 0.0: p.lifetime = life
+	get_parent().add_child(p)
+
+func play_sound(sound : AudioStreamPlayer, pitch : float = 1.0, volume : float = -10.0):
+	sound.pitch_scale = pitch
+	sound.volume_db = volume
+	sound.play()
+
+func squish(squish_scale : Vector2, time : float):
+	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	sprite.scale = squish_scale
+	tween.tween_property(sprite, "scale", Vector2(1,1), time)
+
+func on_landing():
+	play_sound(land_sound, 1.0, (stored_velocity.y * 0.1) - 60.0)
+	create_particle(land_particle, feet_offset, stored_velocity.y * 0.0015)
+	squish(Vector2(1.0 + stored_velocity.y * 0.0003,1.0 - stored_velocity.y * 0.0003), 0.25)
+
+func play_jump_effects(pitch : float = 1.0, volume : float = -10.0):
+	play_sound(jump_sound, pitch, volume)
+	create_particle(jump_particle, feet_offset)
+	squish(Vector2(0.9,1.1),0.25)
 
 func apply_gravity(delta):
 	var current_terminal_velocity = cling_speed if clinging else terminal_velocity
@@ -69,7 +110,7 @@ func handle_wall_jump():
 		velocity.x = wall_normal.x * speed * wall_jump_horizontal_scale
 		velocity.y = jump_velocity * wall_jump_vertical_scale
 		just_wall_jumped = true
-		jump_sound.play()
+		play_jump_effects(1.3,-15.0)
 		air_jumps_made = 0
 
 func handle_jump():
@@ -78,7 +119,7 @@ func handle_jump():
 	# Jumping
 	if (is_on_floor() or coyote_time.time_left > 0.0) and Input.is_action_just_pressed("Jump"):
 		velocity.y = jump_velocity
-		jump_sound.play()
+		play_jump_effects()
 	# Off of Floor
 	if not is_on_floor():
 		# Short Hops
@@ -89,7 +130,7 @@ func handle_jump():
 		if Input.is_action_just_pressed("Jump") and air_jumps_made < air_jumps and coyote_time.time_left == 0.0 and not just_wall_jumped:
 			velocity.y = jump_velocity * air_jump_scale
 			air_jumps_made += 1
-			jump_sound.play()
+			play_jump_effects(1.0 + 0.2 * air_jumps_made, -15.0)
 
 func apply_acceleration(input_axis,delta):
 	sprinting = Input.is_action_pressed("Sprint")
@@ -130,8 +171,18 @@ func update_animations(input_axis):
 			sprite.play("fall")
 		if clinging: sprite.play("cling")
 
+func damage(hardDamage : bool):
+	if invincibilty_timer.time_left == 0.0 or hardDamage:
+		current_health -= 1
+		hurt_sound.play()
+		invincibilty_timer.start()
+		if current_health <= 0:
+			die()
+		if hardDamage: global_position = respawn_point
+
 func die():
 	Global.player_lives -= 1
+	current_health = max_health
 	if Global.player_lives <= 0:
 		get_tree().reload_current_scene()
 		Global.player_lives = 5
@@ -139,10 +190,10 @@ func die():
 		global_position = respawn_point
 
 func _on_hazard_collider_body_entered(_body):
-	call_deferred("die")
+	call_deferred("damage",_body.is_in_group("HardDamage"))
 
 func _on_hazard_collider_area_entered(_area):
-	call_deferred("die")
+	call_deferred("damage",_area.is_in_group("HardDamage"))
 
 func _on_trigger_collider_area_entered(area):
 	area.onCollide()
@@ -151,3 +202,8 @@ func _on_enemy_collider_body_entered(body):
 	if body.is_in_group("Enemy") and velocity.y > 0.0:
 		velocity.y = jump_velocity
 		body.die()
+		squish(Vector2(0.9,1.1),0.25)
+
+func _on_invincibilty_timer_timeout():
+	$HazardCollider/CollisionShape2D.disabled = true
+	$HazardCollider/CollisionShape2D.disabled = false

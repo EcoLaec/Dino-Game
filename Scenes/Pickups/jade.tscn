@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://clccxl6duttvy"]
+[gd_scene load_steps=13 format=3 uid="uid://clccxl6duttvy"]
 
 [ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_6kgho"]
 [ext_resource type="Texture2D" uid="uid://dyuj5ut3eaypl" path="res://Textures/Pickups/Jade.png" id="2_v53xl"]
+[ext_resource type="AudioStream" uid="uid://yitc65cab31h" path="res://Audio/Level/Pickup High.wav" id="3_vm7jq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1foao"]
 radius = 6.0
@@ -72,3 +73,7 @@ shape = SubResource("CircleShape2D_1foao")
 sprite_frames = SubResource("SpriteFrames_d3wx4")
 autoplay = "default"
 frame_progress = 0.0179838
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_vm7jq")
+volume_db = -15.0

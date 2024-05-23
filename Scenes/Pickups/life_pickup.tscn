@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://c24w1hdbkkjec"]
+
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_2shr8"]
+[ext_resource type="Script" path="res://Scripts/LifePickup.gd" id="2_wjbje"]
+[ext_resource type="Texture2D" uid="uid://3bu6rvxyeobk" path="res://Textures/Pickups/Green Egg.png" id="3_t22da"]
+[ext_resource type="AudioStream" uid="uid://cr4j2s5j3xhar" path="res://Audio/Level/Pickup Egg Sound.wav" id="4_fkdr4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qowfm"]
+radius = 6.08276
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm4vn"]
+atlas = ExtResource("3_t22da")
+region = Rect2(0, 0, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rektc"]
+atlas = ExtResource("3_t22da")
+region = Rect2(13, 0, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nyda"]
+atlas = ExtResource("3_t22da")
+region = Rect2(26, 0, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnqu2"]
+atlas = ExtResource("3_t22da")
+region = Rect2(39, 0, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoe13"]
+atlas = ExtResource("3_t22da")
+region = Rect2(52, 0, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pca27"]
+atlas = ExtResource("3_t22da")
+region = Rect2(65, 0, 13, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r12rc"]
+atlas = ExtResource("3_t22da")
+region = Rect2(78, 0, 13, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mjeq"]
+animations = [{
+"frames": [{
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_rm4vn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rektc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nyda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnqu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoe13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pca27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r12rc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LifePickup" instance=ExtResource("1_2shr8")]
+script = ExtResource("2_wjbje")
+points = 500
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_qowfm")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_7mjeq")
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("4_fkdr4")
+volume_db = -5.0

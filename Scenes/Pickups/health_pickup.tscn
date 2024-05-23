@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnsn4farym10p"]
+
+[ext_resource type="PackedScene" uid="uid://b3aoivp5rri5u" path="res://Scenes/Pickups/pickup.tscn" id="1_fhkfa"]
+[ext_resource type="Script" path="res://Scripts/HealthPickup.gd" id="2_g62rx"]
+[ext_resource type="Texture2D" uid="uid://cu2gbseos1pv2" path="res://Textures/Pickups/Meat.png" id="3_1o7lf"]
+[ext_resource type="AudioStream" uid="uid://rllvdw4npn43" path="res://Audio/Level/Pickup Food.wav" id="4_cpa4m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_12vdc"]
+radius = 8.06226
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xpt28"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1o7lf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HealthPickup" instance=ExtResource("1_fhkfa")]
+script = ExtResource("2_g62rx")
+points = 500
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_12vdc")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_xpt28")
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("4_cpa4m")
+volume_db = -5.0

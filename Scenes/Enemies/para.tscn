@@ -151,6 +151,7 @@ size = Vector2(4, 4)
 
 [node name="Para" instance=ExtResource("1_80rvl")]
 speed = 20.0
+points = 250
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_a3nsp")

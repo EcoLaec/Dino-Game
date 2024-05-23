@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cixu4p8fh3t5e"]
+
+[ext_resource type="PackedScene" uid="uid://c4r18ti01e1b4" path="res://Scenes/Levels/world.tscn" id="1_tq3g6"]
+[ext_resource type="PackedScene" uid="uid://b2js8fp0tklxr" path="res://Scenes/Levels/level1.tscn" id="2_1snw7"]
+[ext_resource type="PackedScene" uid="uid://cgse7ldjb6phr" path="res://Scenes/checkpoint.tscn" id="3_h0wp5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dep2"]
+size = Vector2(768, 32)
+
+[node name="World" instance=ExtResource("1_tq3g6")]
+next_level = ExtResource("2_1snw7")
+level_time = 135
+
+[node name="LavaTiles" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(6, 0, 0, 7, 0, 0, 65542, 0, 1, 65543, 0, 1, 65541, 0, 1, 131077, 0, 1, 131078, 0, 1, 131079, 0, 1, 5, 0, 0)
+
+[node name="GroundTiles" parent="." index="2"]
+layer_0/tile_data = PackedInt32Array(131070, 0, 0, 196606, 0, 0, 262142, 0, 0, 131071, 0, 0, 196607, 0, 0, 262143, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 4, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, -65541, 0, 0, -5, 0, 0, 65531, 0, 0, 131067, 0, 0, 196603, 0, 0, 262139, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, 131068, 0, 0, 196604, 0, 0, 262140, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, 131069, 0, 0, 196605, 0, 0, 262141, 0, 0, 131065, 0, 0, 196601, 0, 0, 262137, 0, 0, 131066, 0, 0, 196602, 0, 0, 262138, 0, 0, -327680, 0, 0, -262144, 0, 0, -327679, 0, 0, -262143, 0, 0, -327678, 0, 0, -262142, 0, 0, -458747, 0, 0, -393211, 0, 0, -458746, 0, 0, -393210, 0, 0, -458745, 0, 0, -393209, 0, 0, -786424, 0, 0, -720888, 0, 0, -655352, 0, 0, -589816, 0, 0, -524280, 0, 0, -458744, 0, 0, -393208, 0, 0, -327672, 0, 0, -262136, 0, 0, -196600, 0, 0, -131064, 0, 0, -65528, 0, 0, 8, 0, 0, 65544, 0, 0, 131080, 0, 0, -786423, 0, 0, -720887, 0, 0, -655351, 0, 0, -589815, 0, 0, -524279, 0, 0, -458743, 0, 0, -393207, 0, 0, -327671, 0, 0, -262135, 0, 0, -196599, 0, 0, -131063, 0, 0, -65527, 0, 0, 9, 0, 0, 65545, 0, 0, 131081, 0, 0, 196616, 0, 0, 196617, 0, 0, -720905, 0, 0, -655369, 0, 0, -589833, 0, 0, -524297, 0, 0, -458761, 0, 0, -393225, 0, 0, -327689, 0, 0, -262153, 0, 0, -196617, 0, 0, -131081, 0, 0, -65545, 0, 0, -9, 0, 0, 65527, 0, 0, 131063, 0, 0, 196599, 0, 0, 262135, 0, 0, -720904, 0, 0, -655368, 0, 0, -589832, 0, 0, -524296, 0, 0, -458760, 0, 0, -393224, 0, 0, -327688, 0, 0, -262152, 0, 0, -196616, 0, 0, -131080, 0, 0, -65544, 0, 0, -8, 0, 0, 65528, 0, 0, 131064, 0, 0, 196600, 0, 0, 262136, 0, 0, 65540, 0, 0, 131076, 0, 0)
+
+[node name="CollisionShape2D" parent="VoidCollider" index="0"]
+position = Vector2(0, 112)
+shape = SubResource("RectangleShape2D_4dep2")
+
+[node name="LevelObjects" parent="." index="7"]
+layer_0/tile_data = PackedInt32Array(-589818, 1, 131072, -131079, 1, 65536, -196615, 1, 65536, -262151, 1, 65536, -196610, 1, 65536, -196602, 1, 65536, -131066, 1, 65536, -65530, 1, 65536, -524287, 1, 65536, -524286, 1, 65536, -524288, 1, 65536, -196611, 1, 65536, -196612, 1, 65536)
+
+[node name="Checkpoint" parent="." index="8" instance=ExtResource("3_h0wp5")]
+position = Vector2(-64, -48)
+
+[connection signal="area_entered" from="LevelObjects/Amber" to="LevelObjects/Amber" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/Jade" to="LevelObjects/Jade" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19507" to="LevelObjects/@Area2D@19507" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19508" to="LevelObjects/@Area2D@19508" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19509" to="LevelObjects/@Area2D@19509" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19510" to="LevelObjects/@Area2D@19510" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19511" to="LevelObjects/@Area2D@19511" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19512" to="LevelObjects/@Area2D@19512" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19513" to="LevelObjects/@Area2D@19513" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19514" to="LevelObjects/@Area2D@19514" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19515" to="LevelObjects/@Area2D@19515" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19516" to="LevelObjects/@Area2D@19516" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@19517" to="LevelObjects/@Area2D@19517" method="_on_area_entered"]

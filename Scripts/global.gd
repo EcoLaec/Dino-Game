@@ -1,6 +1,7 @@
 extends Node
 
-var player_lives = 5
+var player : Player
+var player_lives = 3
 var score = 0
 var rng = RandomNumberGenerator.new()
 

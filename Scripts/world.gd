@@ -11,6 +11,7 @@ func _ready():
 	level_transition.fade_from_black()
 
 func complete_level():
+	Global.score += int(LevelTimer.time_left) * 5
 	get_tree().paused = true
 	if not next_level is PackedScene: return
 	await level_transition.fade_to_black()

@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgse7ldjb6phr"]
+
+[ext_resource type="Script" path="res://Scripts/Checkpoint.gd" id="1_vkx46"]
+[ext_resource type="Texture2D" uid="uid://dxjpro7y0oeg" path="res://Textures/Tiles/Checkpoint Flower.png" id="2_1aldi"]
+[ext_resource type="AudioStream" uid="uid://3jmr10m48cyx" path="res://Audio/Level/plant grow.wav" id="3_uus13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gub0"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qn5m"]
+atlas = ExtResource("2_1aldi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1rqv"]
+atlas = ExtResource("2_1aldi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw7od"]
+atlas = ExtResource("2_1aldi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n04my"]
+atlas = ExtResource("2_1aldi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_odl03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qn5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1rqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw7od")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n04my")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 12.0
+}]
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_vkx46")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4gub0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_odl03")
+animation = &"activate"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uus13")
+volume_db = -5.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
