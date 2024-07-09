@@ -325,5 +325,6 @@ libraries = {
 [connection signal="area_entered" from="HazardCollider" to="." method="_on_hazard_collider_area_entered"]
 [connection signal="body_entered" from="HazardCollider" to="." method="_on_hazard_collider_body_entered"]
 [connection signal="area_entered" from="TriggerCollider" to="." method="_on_trigger_collider_area_entered"]
+[connection signal="area_entered" from="EnemyCollider" to="." method="_on_enemy_collider_area_entered"]
 [connection signal="body_entered" from="EnemyCollider" to="." method="_on_enemy_collider_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibilty_timer_timeout"]

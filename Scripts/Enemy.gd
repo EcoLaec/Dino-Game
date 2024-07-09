@@ -26,6 +26,7 @@ func change_direction():
 	edge_shape.position.x = -edge_shape.position.x
 
 func die():
+	hurt_sound.pitch_scale = 1 + Global.rng.randf_range(-0.2,0.2)
 	hurt_sound.play()
 	is_moving = false
 	if not invincible: call_deferred("disable_collision")

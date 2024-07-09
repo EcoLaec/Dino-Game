@@ -214,3 +214,10 @@ func _on_invincibilty_timer_timeout():
 	hurt_animation.play("RESET")
 	$HazardCollider/CollisionShape2D.disabled = true
 	$HazardCollider/CollisionShape2D.disabled = false
+
+func _on_enemy_collider_area_entered(area):
+	if area.is_in_group("Enemy") and velocity.y > 0.0:
+		velocity.y = jump_velocity
+		air_jumps_made = 0
+		area.die()
+		squish(Vector2(0.9,1.1),0.25)

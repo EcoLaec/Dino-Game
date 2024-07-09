@@ -23,10 +23,11 @@ func player_death(player : Player):
 	get_tree().paused = true
 	await level_transition.fade_to_black()
 	Global.player_lives -= 1
+	Global.score -= 1000
 	player.current_health = player.max_health
 	if Global.player_lives <= 0:
-		get_tree().reload_current_scene()
-		Global.player_lives = 5
+		print(Global.score)
+		get_tree().quit()
 	else:
 		player.global_position = player.respawn_point
 		player.velocity = Vector2.ZERO
