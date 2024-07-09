@@ -244,6 +244,8 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
+floor_constant_speed = true
+floor_snap_length = 3.0
 script = ExtResource("1_oe6k2")
 jump_particle = ExtResource("2_w4sh3")
 land_particle = ExtResource("3_wb527")
