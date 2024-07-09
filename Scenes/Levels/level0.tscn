@@ -24,8 +24,74 @@ layer_0/tile_data = PackedInt32Array(131067, 1, 0, 65540, 1, 0, 262151, 1, 0, 65
 position = Vector2(758, 237)
 shape = SubResource("RectangleShape2D_l156w")
 
+<<<<<<< HEAD
 [node name="LevelObjects" parent="." index="8"]
 layer_0/tile_data = PackedInt32Array(-14, 1, 196608, -1376145, 1, 196608, -1179652, 1, 196608, -2359233, 1, 131072, 9, 1, 65536, 14, 1, 65536, 15, 1, 65536, -65511, 1, 65536, -65504, 1, 65536, -65503, 1, 65536, -65496, 1, 65536, -65495, 1, 65536, -65489, 1, 65536, -65488, 1, 65536, -65482, 1, 65536, -131009, 1, 65536, -131008, 1, 65536, -131001, 1, 65536, -131000, 1, 65536, -262067, 1, 65536, -393133, 1, 65536, -393134, 1, 65536, -786345, 1, 65536, -786346, 1, 65536, -917423, 1, 65536, -917424, 1, 65536, -917422, 1, 65536, -1048502, 1, 65536, -1048501, 1, 65536, -1179601, 1, 65536, -1179602, 1, 65536, -1179603, 1, 65536, -1179616, 1, 65536, -1441773, 1, 65536, -1638379, 1, 65536, -1834988, 1, 65536, -2031594, 1, 65536, -2162656, 1, 65536, -2162655, 1, 65536, -2162648, 1, 65536, -2162647, 1, 65536, -2162639, 1, 65536, -2162638, 1, 65536, -2097095, 1, 65536, -2097094, 1, 65536, -1245163, 1, 327680, 28, 2, 262144, 37, 2, 262144, -1179593, 2, 131072, -1114074, 2, 131072, -1179621, 2, 131072, -1179637, 2, 65536, -1245181, 2, 65536, -2097124, 2, 131072, -2162651, 2, 131072, -2162644, 2, 131072, -2097099, 2, 131072, -1507297, 2, 196608, -393163, 2, 196608, -196595, 2, 196608)
 
 [node name="Checkpoint" parent="." index="9" instance=ExtResource("2_4pv7w")]
 position = Vector2(1056, -272)
+=======
+[node name="Checkpoint" parent="." index="7" instance=ExtResource("3_h0wp5")]
+position = Vector2(560, -208)
+
+[node name="Checkpoint2" parent="." index="8" instance=ExtResource("3_h0wp5")]
+position = Vector2(392, -288)
+
+[node name="LevelObjects" parent="." index="10"]
+layer_0/tile_data = PackedInt32Array(-851927, 1, 327680, -1966096, 1, 262144, -917494, 1, 393216, -2359251, 1, 196608, -1376197, 1, 196608, 131098, 1, 196608, -2490352, 1, 131072, -1966080, 1, 65536, -2031611, 1, 65536, -2031610, 1, 65536, -1769479, 1, 65536, -1769477, 1, 65536, -1310732, 1, 65536, -1441803, 1, 65536, -1638412, 1, 65536, -1114123, 1, 65536, -851974, 1, 65536, -851972, 1, 65536, -917500, 1, 65536, -917499, 1, 65536, -983025, 1, 65536, -983024, 1, 65536, -1572826, 1, 65536, -1572824, 1, 65536, -1507285, 1, 65536, -1441742, 1, 65536, -1441744, 1, 65536, -1048526, 1, 65536, -1245134, 1, 65536, -851921, 1, 65536, -393186, 1, 65536, -589795, 1, 65536, -786402, 1, 65536, -262116, 1, 65536, -196585, 1, 65536, -65530, 1, 65536, -65525, 1, 65536, -131059, 1, 65536, -1507298, 1, 65536, -1179628, 1, 65536, -1572831, 1, 65536, -2162672, 1, 65536, -2359254, 1, 65536, -2359253, 1, 65536, -2490323, 1, 65536, -2359249, 1, 65536, -2359248, 1, 65536, -2293716, 1, 65536, -2424788, 1, 65536, -2424786, 1, 65536, -2293714, 1, 65536, -458732, 2, 196608, -2686949, 2, 196608, -1769446, 2, 131072, -2359277, 1, 65536, -2097141, 1, 65536, -2162673, 1, 65536)
+
+[connection signal="area_entered" from="LevelObjects/HealthPickup" to="LevelObjects/HealthPickup" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/LifePickup" to="LevelObjects/LifePickup" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/TimePickup" to="LevelObjects/TimePickup" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/Pearl" to="LevelObjects/Pearl" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18065" to="LevelObjects/@Area2D@18065" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18066" to="LevelObjects/@Area2D@18066" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/Amber" to="LevelObjects/Amber" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/Jade" to="LevelObjects/Jade" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18067" to="LevelObjects/@Area2D@18067" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18068" to="LevelObjects/@Area2D@18068" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18069" to="LevelObjects/@Area2D@18069" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18070" to="LevelObjects/@Area2D@18070" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18071" to="LevelObjects/@Area2D@18071" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18072" to="LevelObjects/@Area2D@18072" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18073" to="LevelObjects/@Area2D@18073" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18074" to="LevelObjects/@Area2D@18074" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18075" to="LevelObjects/@Area2D@18075" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18076" to="LevelObjects/@Area2D@18076" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18077" to="LevelObjects/@Area2D@18077" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18078" to="LevelObjects/@Area2D@18078" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18079" to="LevelObjects/@Area2D@18079" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18080" to="LevelObjects/@Area2D@18080" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18081" to="LevelObjects/@Area2D@18081" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18082" to="LevelObjects/@Area2D@18082" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18083" to="LevelObjects/@Area2D@18083" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18084" to="LevelObjects/@Area2D@18084" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18085" to="LevelObjects/@Area2D@18085" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18086" to="LevelObjects/@Area2D@18086" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18087" to="LevelObjects/@Area2D@18087" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18088" to="LevelObjects/@Area2D@18088" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18089" to="LevelObjects/@Area2D@18089" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18090" to="LevelObjects/@Area2D@18090" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18091" to="LevelObjects/@Area2D@18091" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18092" to="LevelObjects/@Area2D@18092" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18093" to="LevelObjects/@Area2D@18093" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18094" to="LevelObjects/@Area2D@18094" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18095" to="LevelObjects/@Area2D@18095" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18096" to="LevelObjects/@Area2D@18096" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18097" to="LevelObjects/@Area2D@18097" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18098" to="LevelObjects/@Area2D@18098" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18099" to="LevelObjects/@Area2D@18099" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18100" to="LevelObjects/@Area2D@18100" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18101" to="LevelObjects/@Area2D@18101" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18102" to="LevelObjects/@Area2D@18102" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18103" to="LevelObjects/@Area2D@18103" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18104" to="LevelObjects/@Area2D@18104" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18105" to="LevelObjects/@Area2D@18105" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18106" to="LevelObjects/@Area2D@18106" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18107" to="LevelObjects/@Area2D@18107" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18108" to="LevelObjects/@Area2D@18108" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18109" to="LevelObjects/@Area2D@18109" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18111" to="LevelObjects/@Area2D@18111" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18112" to="LevelObjects/@Area2D@18112" method="_on_area_entered"]
+[connection signal="area_entered" from="LevelObjects/@Area2D@18113" to="LevelObjects/@Area2D@18113" method="_on_area_entered"]
+>>>>>>> 9848a2ca26e7d03c3f8bc8cc244d7ecf23929307
