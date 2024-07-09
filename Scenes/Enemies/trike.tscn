@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://7at2mbjbdsnb"]
+[gd_scene load_steps=25 format=3 uid="uid://7at2mbjbdsnb"]
 
 [ext_resource type="PackedScene" uid="uid://duymyarr3tiiu" path="res://Scenes/Enemies/enemy.tscn" id="1_es3uk"]
 [ext_resource type="Texture2D" uid="uid://dyxgx2f02ingm" path="res://Textures/Enemies/Trike Die.png" id="2_oybu6"]
 [ext_resource type="Texture2D" uid="uid://cdppyxd8cdp08" path="res://Textures/Enemies/Trike Walk.png" id="3_kijwb"]
+[ext_resource type="AudioStream" uid="uid://bgehrnsgil1lp" path="res://Audio/Enemies/Dino_Hurt_4.wav" id="4_bh8m5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hy88g"]
 atlas = ExtResource("2_oybu6")
@@ -156,3 +157,6 @@ autoplay = "move"
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_6dqq0")
+
+[node name="HurtSound" parent="." index="3"]
+stream = ExtResource("4_bh8m5")

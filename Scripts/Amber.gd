@@ -1,5 +1,5 @@
 extends Pickup
 
-func _on_audio_stream_player_finished():
+func _on_pickup_sound_finished():
 	Global.level_complete.emit()
-	super._on_audio_stream_player_finished()
+	super._on_pickup_sound_finished()

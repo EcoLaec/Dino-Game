@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnh6ddwhlbey3"]
+[gd_scene load_steps=23 format=3 uid="uid://cnh6ddwhlbey3"]
 
 [ext_resource type="PackedScene" uid="uid://duymyarr3tiiu" path="res://Scenes/Enemies/enemy.tscn" id="1_8gevl"]
 [ext_resource type="Texture2D" uid="uid://bdujtyo24un3w" path="res://Textures/Enemies/Ptero Die.png" id="2_ngxgo"]
 [ext_resource type="Texture2D" uid="uid://bm1ijkhlou4y8" path="res://Textures/Enemies/Ptero Fly.png" id="3_v4b6j"]
+[ext_resource type="AudioStream" uid="uid://fmy561cfayan" path="res://Audio/Enemies/Dino_Hurt_2.wav" id="4_r7tva"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kjhms"]
 atlas = ExtResource("2_ngxgo")
@@ -143,3 +144,6 @@ autoplay = "move"
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_jnuss")
+
+[node name="HurtSound" parent="." index="3"]
+stream = ExtResource("4_r7tva")

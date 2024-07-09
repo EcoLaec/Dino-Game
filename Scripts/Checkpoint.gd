@@ -7,5 +7,5 @@ func _on_area_entered(area):
 	if not active: 
 		$AnimatedSprite2D.play("activate")
 		Global.score += 1500
-		$AudioStreamPlayer.play()
+		$ActivateSound.play()
 	active = true

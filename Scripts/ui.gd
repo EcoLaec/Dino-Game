@@ -19,4 +19,4 @@ func _process(_delta):
 			hearts[i].texture = empty_health_sprite
 	%LivesLabel.text = "x" + str(Global.player_lives)
 	%ScoreLabel.text = "Score: " + str(Global.score).pad_zeros(6)
-	%TimeLabel.text = str(int(LevelTimer.time_left) / 60).pad_zeros(2) + ":" + str(int(LevelTimer.time_left) % 60).pad_zeros(2)
+	%TimeLabel.text = str(int(LevelTimer.time_left / 60.0)).pad_zeros(2) + ":" + str(int(LevelTimer.time_left) % 60).pad_zeros(2)

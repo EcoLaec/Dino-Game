@@ -74,6 +74,5 @@ sprite_frames = SubResource("SpriteFrames_d3wx4")
 autoplay = "default"
 frame_progress = 0.0179838
 
-[node name="AudioStreamPlayer" parent="." index="2"]
+[node name="PickupSound" parent="." index="2"]
 stream = ExtResource("3_vm7jq")
-volume_db = -15.0

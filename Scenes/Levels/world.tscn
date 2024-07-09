@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://c4r18ti01e1b4"]
 
 [ext_resource type="Texture2D" uid="uid://cqc3ukfntn1hk" path="res://Textures/Tiles/Lava Tile.png" id="1_7reld"]
-[ext_resource type="PackedScene" uid="uid://m5vy3s7wi0oq" path="res://Scenes/Tiles/ground_tiles.tscn" id="1_nth3u"]
+[ext_resource type="PackedScene" uid="uid://m5vy3s7wi0oq" path="res://Scenes/Tiles/ground_tiles_actual.tscn" id="1_nth3u"]
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_u1my8"]
 [ext_resource type="Texture2D" uid="uid://bikmtc5q42ye1" path="res://Textures/Tiles/Fossils.png" id="2_1mypl"]
 [ext_resource type="PackedScene" uid="uid://dndfmn3ab8n1r" path="res://Scenes/background.tscn" id="2_llmto"]
@@ -132,6 +132,7 @@ sources/2 = SubResource("TileSetScenesCollectionSource_p1uob")
 script = ExtResource("1_u1my8")
 
 [node name="Background" parent="." instance=ExtResource("2_llmto")]
+scroll_offset = Vector2(262.139, 671.531)
 
 [node name="GroundTiles" parent="." instance=ExtResource("1_nth3u")]
 

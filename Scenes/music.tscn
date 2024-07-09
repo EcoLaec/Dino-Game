@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqcj8on0mnquk"]
 
-[ext_resource type="AudioStream" uid="uid://dlpnosrvdy0l8" path="res://Audio/Dino Game Song  - Playful.wav" id="1_0v3yw"]
+[ext_resource type="AudioStream" uid="uid://c7bknd5l83g6i" path="res://Audio/DinoGameSong-Calm.wav" id="1_n33e7"]
 
 [node name="Music" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("1_0v3yw")
+stream = ExtResource("1_n33e7")
 volume_db = -10.0
 autoplay = true

@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite = $AnimatedSprite2D
 @onready var shape = $CollisionShape2D
 @onready var edge_shape = $EdgeDetector/CollisionShape2D
+@onready var hurt_sound = $HurtSound
 var direction = Vector2.RIGHT
 var is_moving = true
 
@@ -25,6 +26,7 @@ func change_direction():
 	edge_shape.position.x = -edge_shape.position.x
 
 func die():
+	hurt_sound.play()
 	is_moving = false
 	if not invincible: call_deferred("disable_collision")
 	sprite.stop()

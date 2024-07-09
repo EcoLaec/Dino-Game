@@ -1,16 +1,25 @@
-[gd_scene load_steps=34 format=3 uid="uid://ctwkidvtt0ar3"]
+[gd_scene load_steps=40 format=3 uid="uid://ctwkidvtt0ar3"]
 
 [ext_resource type="Texture2D" uid="uid://bm8gkvt7t72x7" path="res://Textures/Player/Green Dino Fall.png" id="1_kodxw"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oe6k2"]
-[ext_resource type="PackedScene" uid="uid://bopu67p86gtdt" path="res://Scenes/Particles/jump_particle.tscn" id="2_e7dkk"]
 [ext_resource type="Texture2D" uid="uid://b83b11nmxeymv" path="res://Textures/Player/Green Dino Cling.png" id="2_n1cg4"]
 [ext_resource type="Texture2D" uid="uid://bg2hh1osprogl" path="res://Textures/Player/Green Dino Idle.png" id="2_pvln0"]
-[ext_resource type="PackedScene" uid="uid://tln0hfgtg8ma" path="res://Scenes/Particles/land_particle.tscn" id="3_jjvkp"]
+[ext_resource type="PackedScene" uid="uid://bopu67p86gtdt" path="res://Scenes/Particles/jump_particle.tscn" id="2_w4sh3"]
 [ext_resource type="Texture2D" uid="uid://crqb3srtsnsql" path="res://Textures/Player/Green Dino Jump.png" id="3_kquyr"]
+[ext_resource type="PackedScene" uid="uid://tln0hfgtg8ma" path="res://Scenes/Particles/land_particle.tscn" id="3_wb527"]
 [ext_resource type="Texture2D" uid="uid://dbwnulovng1cv" path="res://Textures/Player/Green Dino Walk.png" id="4_874qn"]
 [ext_resource type="Texture2D" uid="uid://b1aarbcsdrfv2" path="res://Textures/Player/Green Dino Run.png" id="5_6wy7i"]
+[ext_resource type="Texture2D" uid="uid://c7nahaogmibps" path="res://Textures/Player/Green Dino Hurt.png" id="6_83det"]
 [ext_resource type="AudioStream" uid="uid://c1sbesssox5ga" path="res://Audio/Player/Land.wav" id="11_f7jsw"]
 [ext_resource type="AudioStream" uid="uid://bn3ee21176jmt" path="res://Audio/Player/Hurt.wav" id="12_mxrxs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pffl"]
+atlas = ExtResource("6_83det")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbflg"]
+atlas = ExtResource("6_83det")
+region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmtro"]
 atlas = ExtResource("2_pvln0")
@@ -93,6 +102,17 @@ animations = [{
 "loop": true,
 "name": &"fall",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pffl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbflg")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -184,13 +204,52 @@ format = 1
 mix_rate = 24000
 stereo = true
 
+[sub_resource type="Animation" id="Animation_s4jee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_smjuw"]
+resource_name = "blink"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h74lr"]
+_data = {
+"RESET": SubResource("Animation_s4jee"),
+"blink": SubResource("Animation_smjuw")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_oe6k2")
-jump_particle = ExtResource("2_e7dkk")
-land_particle = ExtResource("3_jjvkp")
+jump_particle = ExtResource("2_w4sh3")
+land_particle = ExtResource("3_wb527")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 3
 position = Vector2(0, 9)
 sprite_frames = SubResource("SpriteFrames_ex3qy")
 animation = &"idle"
@@ -235,7 +294,12 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="InvincibiltyTimer" type="Timer" parent="."]
+[node name="InvincibilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitStopTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 0.15
 one_shot = true
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
@@ -247,11 +311,17 @@ stream = ExtResource("11_f7jsw")
 volume_db = -10.0
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("12_mxrxs")
+
+[node name="HurtAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h74lr")
+}
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="HazardCollider" to="." method="_on_hazard_collider_area_entered"]
 [connection signal="body_entered" from="HazardCollider" to="." method="_on_hazard_collider_body_entered"]
 [connection signal="area_entered" from="TriggerCollider" to="." method="_on_trigger_collider_area_entered"]
 [connection signal="body_entered" from="EnemyCollider" to="." method="_on_enemy_collider_body_entered"]
-[connection signal="timeout" from="InvincibiltyTimer" to="." method="_on_invincibilty_timer_timeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibilty_timer_timeout"]

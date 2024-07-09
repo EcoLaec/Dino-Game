@@ -5,8 +5,8 @@ extends Area2D
 
 func onPickup(_area):
 	Global.score += points
-	$AudioStreamPlayer.pitch_scale = 1.0 + Global.rng.randf_range(-0.15,0.15)
-	$AudioStreamPlayer.play()
+	$PickupSound.pitch_scale = 1.0 + Global.rng.randf_range(-0.15,0.15)
+	$PickupSound.play()
 	$PickupParticles.emitting = true
 	call_deferred("disable_pickup")
 
@@ -18,5 +18,5 @@ func disable_pickup():
 func _on_area_entered(area):
 	onPickup(area)
 
-func _on_audio_stream_player_finished():
+func _on_pickup_sound_finished():
 	queue_free()

@@ -76,7 +76,7 @@ shape = SubResource("CircleShape2D_dxilt")
 sprite_frames = SubResource("SpriteFrames_bb5vi")
 frame_progress = 0.962507
 
-[node name="AudioStreamPlayer" parent="." index="2"]
+[node name="PickupSound" parent="." index="2"]
 stream = ExtResource("4_v10jt")
 
 [node name="AmbientParticles" parent="." index="3"]

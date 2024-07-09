@@ -7,6 +7,7 @@ extends Node2D
 
 func _ready():
 	Global.level_complete.connect(complete_level)
+	Global.player_died.connect(player_death)
 	LevelTimer.start(level_time)
 	level_transition.fade_from_black()
 
@@ -17,3 +18,17 @@ func complete_level():
 	await level_transition.fade_to_black()
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(next_level)
+
+func player_death(player : Player):
+	get_tree().paused = true
+	await level_transition.fade_to_black()
+	Global.player_lives -= 1
+	player.current_health = player.max_health
+	if Global.player_lives <= 0:
+		get_tree().reload_current_scene()
+		Global.player_lives = 5
+	else:
+		player.global_position = player.respawn_point
+		player.velocity = Vector2.ZERO
+	get_tree().paused = false
+	level_transition.fade_from_black()

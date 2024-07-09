@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://n6pl7k3iehbp"]
+[gd_scene load_steps=26 format=3 uid="uid://n6pl7k3iehbp"]
 
 [ext_resource type="PackedScene" uid="uid://duymyarr3tiiu" path="res://Scenes/Enemies/enemy.tscn" id="1_80rvl"]
 [ext_resource type="Texture2D" uid="uid://dcwe80ej00t87" path="res://Textures/Enemies/Para Die.png" id="2_cbxcy"]
 [ext_resource type="Texture2D" uid="uid://cwuvjdg0kghgs" path="res://Textures/Enemies/Para Walk.png" id="3_d7ttd"]
+[ext_resource type="AudioStream" uid="uid://kbnppk0kibux" path="res://Audio/Enemies/Dino_Hurt_3.wav" id="4_1i12v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mynqq"]
 atlas = ExtResource("2_cbxcy")
@@ -167,3 +168,6 @@ shape = SubResource("RectangleShape2D_suw0i")
 [node name="CollisionShape2D" parent="EdgeDetector" index="0"]
 position = Vector2(8, 11)
 shape = SubResource("RectangleShape2D_b5squ")
+
+[node name="HurtSound" parent="." index="3"]
+stream = ExtResource("4_1i12v")

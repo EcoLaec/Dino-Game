@@ -55,7 +55,7 @@ shape = SubResource("RectangleShape2D_4gub0")
 sprite_frames = SubResource("SpriteFrames_odl03")
 animation = &"activate"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ActivateSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_uus13")
 volume_db = -5.0
 

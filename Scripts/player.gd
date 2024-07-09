@@ -28,7 +28,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_sound = $JumpSound
 @onready var land_sound = $LandSound
 @onready var hurt_sound = $HurtSound
-@onready var invincibilty_timer = $InvincibiltyTimer
+@onready var invincibility_timer = $InvincibilityTimer
+@onready var hit_stop_timer = $HitStopTimer
+@onready var hurt_animation = $HurtAnimation
 var air_jumps_made = 0
 var just_wall_jumped = false
 var stored_wall_normal = Vector2.ZERO
@@ -91,7 +93,7 @@ func on_landing():
 	create_particle(land_particle, feet_offset, stored_velocity.y * 0.0015)
 	squish(Vector2(1.0 + stored_velocity.y * 0.0003,1.0 - stored_velocity.y * 0.0003), 0.25)
 
-func play_jump_effects(pitch : float = 1.0, volume : float = -10.0):
+func jump_effects(pitch : float = 1.0, volume : float = -10.0):
 	play_sound(jump_sound, pitch, volume)
 	create_particle(jump_particle, feet_offset)
 	squish(Vector2(0.9,1.1),0.25)
@@ -110,7 +112,7 @@ func handle_wall_jump():
 		velocity.x = wall_normal.x * speed * wall_jump_horizontal_scale
 		velocity.y = jump_velocity * wall_jump_vertical_scale
 		just_wall_jumped = true
-		play_jump_effects(1.3,-15.0)
+		jump_effects(1.3,-15.0)
 		air_jumps_made = 0
 
 func handle_jump():
@@ -119,7 +121,7 @@ func handle_jump():
 	# Jumping
 	if (is_on_floor() or coyote_time.time_left > 0.0) and Input.is_action_just_pressed("Jump"):
 		velocity.y = jump_velocity
-		play_jump_effects()
+		jump_effects()
 	# Off of Floor
 	if not is_on_floor():
 		# Short Hops
@@ -130,7 +132,7 @@ func handle_jump():
 		if Input.is_action_just_pressed("Jump") and air_jumps_made < air_jumps and coyote_time.time_left == 0.0 and not just_wall_jumped:
 			velocity.y = jump_velocity * air_jump_scale
 			air_jumps_made += 1
-			play_jump_effects(1.0 + 0.2 * air_jumps_made, -15.0)
+			jump_effects(1.0 + 0.2 * air_jumps_made, -15.0)
 
 func apply_acceleration(input_axis,delta):
 	sprinting = Input.is_action_pressed("Sprint")
@@ -172,22 +174,25 @@ func update_animations(input_axis):
 		if clinging: sprite.play("cling")
 
 func damage(hardDamage : bool):
-	if invincibilty_timer.time_left == 0.0 or hardDamage:
+	if invincibility_timer.time_left == 0.0 or hardDamage:
 		current_health -= 1
 		hurt_sound.play()
-		invincibilty_timer.start()
+		invincibility_timer.start()
+		hurt_animation.play("blink")
+		hurt_effects()
 		if current_health <= 0:
 			die()
 		if hardDamage: global_position = respawn_point
 
+func hurt_effects():
+	hit_stop_timer.start()
+	sprite.play("hurt")
+	get_tree().paused = true
+	await hit_stop_timer.timeout
+	if not current_health <= 0: get_tree().paused = false
+
 func die():
-	Global.player_lives -= 1
-	current_health = max_health
-	if Global.player_lives <= 0:
-		get_tree().reload_current_scene()
-		Global.player_lives = 5
-	else:
-		global_position = respawn_point
+	Global.player_died.emit(self)
 
 func _on_hazard_collider_body_entered(_body):
 	call_deferred("damage",_body.is_in_group("HardDamage"))
@@ -201,9 +206,11 @@ func _on_trigger_collider_area_entered(area):
 func _on_enemy_collider_body_entered(body):
 	if body.is_in_group("Enemy") and velocity.y > 0.0:
 		velocity.y = jump_velocity
+		air_jumps_made = 0
 		body.die()
 		squish(Vector2(0.9,1.1),0.25)
 
 func _on_invincibilty_timer_timeout():
+	hurt_animation.play("RESET")
 	$HazardCollider/CollisionShape2D.disabled = true
 	$HazardCollider/CollisionShape2D.disabled = false
