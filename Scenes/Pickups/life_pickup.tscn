@@ -75,6 +75,5 @@ shape = SubResource("CircleShape2D_qowfm")
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_7mjeq")
 
-[node name="AudioStreamPlayer" parent="." index="2"]
+[node name="PickupSound" parent="." index="2"]
 stream = ExtResource("4_fkdr4")
-volume_db = -5.0
