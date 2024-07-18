@@ -7,6 +7,7 @@ var rng = RandomNumberGenerator.new()
 
 signal level_complete
 signal player_died(player : Player)
+signal picked_up_pearl
 
 func _ready():
 	rng.randomize()

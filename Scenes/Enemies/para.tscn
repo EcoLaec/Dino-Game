@@ -148,11 +148,11 @@ animations = [{
 size = Vector2(20, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5squ"]
-size = Vector2(4, 4)
+size = Vector2(4, 18)
 
 [node name="Para" instance=ExtResource("1_80rvl")]
 speed = 20.0
-points = 250
+points = 500
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_a3nsp")
@@ -166,7 +166,7 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_suw0i")
 
 [node name="CollisionShape2D" parent="EdgeDetector" index="0"]
-position = Vector2(8, 11)
+position = Vector2(8, 18)
 shape = SubResource("RectangleShape2D_b5squ")
 
 [node name="HurtSound" parent="." index="3"]

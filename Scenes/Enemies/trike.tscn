@@ -148,6 +148,7 @@ animations = [{
 size = Vector2(18, 12)
 
 [node name="Trike" instance=ExtResource("1_es3uk")]
+points = 500
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_mmb2f")

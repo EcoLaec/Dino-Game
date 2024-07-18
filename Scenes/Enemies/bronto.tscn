@@ -152,7 +152,7 @@ animations = [{
 size = Vector2(17, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8iks"]
-size = Vector2(3, 3)
+size = Vector2(3, 18.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08452"]
 size = Vector2(11, 7)
@@ -161,7 +161,7 @@ size = Vector2(11, 7)
 script = ExtResource("2_be3vg")
 health = 3
 speed = 15.0
-points = 500
+points = 1500
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_b1tq7")
@@ -174,7 +174,7 @@ position = Vector2(-1.5, 3.5)
 shape = SubResource("RectangleShape2D_n50np")
 
 [node name="CollisionShape2D" parent="EdgeDetector" index="0"]
-position = Vector2(8, 11)
+position = Vector2(8, 18.75)
 shape = SubResource("RectangleShape2D_q8iks")
 
 [node name="HurtSound" parent="." index="3"]

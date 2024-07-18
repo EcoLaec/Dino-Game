@@ -65,7 +65,8 @@ animations = [{
 }]
 
 [node name="Pearl" instance=ExtResource("1_fgwhf")]
-points = 500
+points = 1500
+key = true
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_mtlo5")

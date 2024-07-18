@@ -2,9 +2,11 @@ class_name Pickup
 extends Area2D
 
 @export var points = 100
+@export var key : bool = false
 
 func onPickup(_area):
 	Global.score += points
+	if key: Global.picked_up_pearl.emit()
 	$PickupSound.pitch_scale = 1.0 + Global.rng.randf_range(-0.15,0.15)
 	$PickupSound.play()
 	$PickupParticles.emitting = true

@@ -136,6 +136,7 @@ size = Vector2(16, 10)
 [node name="Ptero" instance=ExtResource("1_8gevl")]
 speed = 50.0
 flying = true
+points = 500
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_dqgwr")

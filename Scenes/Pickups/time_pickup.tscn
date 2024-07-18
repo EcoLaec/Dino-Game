@@ -21,8 +21,8 @@ animations = [{
 
 [node name="TimePickup" instance=ExtResource("1_eroo7")]
 script = ExtResource("2_d3mqk")
-time_gained = 30.0
-points = 500
+time_gained = 60.0
+points = 1000
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_feivo")

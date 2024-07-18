@@ -12,7 +12,9 @@ func _ready():
 	level_transition.fade_from_black()
 
 func complete_level():
-	Global.score += int(LevelTimer.time_left) * 5
+	Global.score += int(LevelTimer.time_left) * 25
+	Global.score += Global.player_lives * 1000
+	print(Global.score)
 	get_tree().paused = true
 	if not next_level is PackedScene: return
 	await level_transition.fade_to_black()
@@ -23,7 +25,6 @@ func player_death(player : Player):
 	get_tree().paused = true
 	await level_transition.fade_to_black()
 	Global.player_lives -= 1
-	Global.score -= 1000
 	player.current_health = player.max_health
 	if Global.player_lives <= 0:
 		print(Global.score)

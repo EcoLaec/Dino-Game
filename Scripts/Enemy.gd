@@ -29,7 +29,9 @@ func die():
 	hurt_sound.pitch_scale = 1 + Global.rng.randf_range(-0.2,0.2)
 	hurt_sound.play()
 	is_moving = false
-	if not invincible: call_deferred("disable_collision")
+	if not invincible: 
+		call_deferred("disable_collision")
+		Global.score += points
 	sprite.stop()
 	sprite.play("death")
 	await sprite.animation_finished
@@ -37,7 +39,6 @@ func die():
 		is_moving = true
 		sprite.play("move")
 	else:
-		Global.score += points
 		queue_free()
 
 func disable_collision():

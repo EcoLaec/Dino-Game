@@ -67,7 +67,7 @@ animations = [{
 
 [node name="LifePickup" instance=ExtResource("1_2shr8")]
 script = ExtResource("2_wjbje")
-points = 500
+points = 1000
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_qowfm")
